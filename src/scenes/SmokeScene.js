@@ -77,7 +77,7 @@ export default class SmokeScene extends Phaser.Scene {
         }
 
         this.videoElement = document.createElement("video");
-        this.videoElement.src = "/intro.mp4";
+        this.videoElement.src = "./intro.mp4";
         this.videoElement.muted = true;
         this.videoElement.autoplay = true;
         this.videoElement.playsInline = true;
