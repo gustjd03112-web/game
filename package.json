@@ -2,7 +2,7 @@
   "name": "chungwoon",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -11,7 +11,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
     "phaser": "^4.2.1",
     "vite": "^8.3.0"
