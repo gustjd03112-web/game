@@ -1,8 +1,13 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
+  // 개발할 때
+  //base: '/'
+  
+  // GitHub Pages에 올릴 때
   base: '/game/',
   build: {
-    chunkSizeWarningLimit: 1500
+    outDir: 'dist',
+    emptyOutDir: true
   }
 })

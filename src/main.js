@@ -1,10 +1,29 @@
 import Phaser from "phaser";
-import SmokeScene from "./scenes/SmokeScene";
-import ExScene from "./scenes/ExScene";
-import LobbyScene from "./scenes/LobbyScene";
-import WestCorridorScene from "./scenes/WestCorridorScene";
+import SmokeScene from "./scenes/SmokeScene.js";
+import LobbyScene from "./scenes/LobbyScene.js";
+import MainHallScene from "./scenes/MainHallScene.js";
+import WestCorridorScene from "./scenes/WestCorridorScene.js";
+// 각 층별 복도신
+import Corridor2F1Scene from "./scenes/2f-1CorridorScene.js";
+import Corridor2F2Scene from "./scenes/2f-2CorridorScene.js";
+import Corridor3F1Scene from "./scenes/3f-1CorridorScene.js";
+import Corridor3F2Scene from "./scenes/3f-2CorridorScene.js";
+import Corridor4F1Scene from "./scenes/4f-1CorridorScene.js";
+import Corridor4F2Scene from "./scenes/4f-2CorridorScene.js";
+import Corridor5F1Scene from "./scenes/5f-1CorridorScene.js";
+import Corridor5F2Scene from "./scenes/5f-2CorridorScene.js";
+import Corridor6F1Scene from "./scenes/6f-1CorridorScene.js";
+import Corridor6F2Scene from "./scenes/6f-2CorridorScene.js";
+import Corridor7F1Scene from "./scenes/7f-1CorridorScene.js";
+import Corridor7F2Scene from "./scenes/7f-2CorridorScene.js";
+import Corridor8F1Scene from "./scenes/8f-1CorridorScene.js";
+import Corridor8F2Scene from "./scenes/8f-2CorridorScene.js";
+import ExScene from "./scenes/ExScene.js";
 
-// .png 파일만 불러오기
+// ✅ 전역 변수 가장 위에
+window.collectedNumbers = {};
+
+// .png 파일 불러오기
 const images = import.meta.glob(
     "./assets/*.png",
     {
@@ -58,7 +77,7 @@ class MainScene extends Phaser.Scene {
         // 플레이어
         this.player = this.add.image(startX, startY, "player_down_idle")
             .setScale(PLAYER_SCALE);
-
+        
         this.currentDirection = "down";
         this.frameIndex = 0;
         this.frameTimer = 0;
@@ -100,22 +119,17 @@ class MainScene extends Phaser.Scene {
         if (this.keys.d.isDown) dx += 1;
 
         const isMoving = dx !== 0 || dy !== 0;
-
         if (isMoving) {
             const length = Math.hypot(dx, dy);
             dx /= length;
             dy /= length;
-
-            if (Math.abs(dx) >= Math.abs(dy)) {
-                this.currentDirection = dx > 0 ? "right" : "left";
-            } else {
-                this.currentDirection = dy > 0 ? "down" : "up";
-            }
+            this.currentDirection = Math.abs(dx) >= Math.abs(dy)
+                ? (dx > 0 ? "right" : "left")
+                : (dy > 0 ? "down" : "up");
         }
 
         this.player.x += dx * PLAYER_SPEED;
         this.player.y += dy * PLAYER_SPEED;
-
         this.player.x = Phaser.Math.Clamp(this.player.x, 20, GAME_WIDTH - 20);
         this.player.y = Phaser.Math.Clamp(this.player.y, 20, GAME_HEIGHT - 20);
 
@@ -127,9 +141,22 @@ class MainScene extends Phaser.Scene {
             this.player.y < SMOKE_ZONE.y2
         ) {
             this.isTransitioning = true;
-            console.log("흡연장으로 이동");
             this.scene.start("SmokeScene");
             return;
+        }
+
+        // 건물 입구 영역 → LobbyScene (1층 로비)
+        if (
+            this.player.x > 500 &&
+            this.player.x < 780 &&
+            this.player.y > 150 &&
+            this.player.y < 350
+        ) {
+            if (!this.isTransitioning) {
+                this.isTransitioning = true;
+                this.scene.start("LobbyScene");
+                return;
+            }
         }
 
         // 건물 영역 충돌
@@ -174,18 +201,35 @@ class MainScene extends Phaser.Scene {
 const config = {
     type: Phaser.AUTO,
     parent: "game",
-    backgroundColor: "#000000", // ✅ 여백이 검은색으로 보이게
+    backgroundColor: "#000000",
     scale: {
-        mode: Phaser.Scale.FIT,      // ✅ 비율 유지하며 꽉 채우기
+        mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: 1280,
-        height: 720
+        width: GAME_WIDTH,
+        height: GAME_HEIGHT
     },
     scene: [
         MainScene,
         SmokeScene,
+        LobbyScene,
+        MainHallScene,
+        WestCorridorScene,
         ExScene,
-        // ... 다른 씬들
+        Corridor2F1Scene,
+        Corridor2F2Scene,
+        Corridor3F1Scene,
+        Corridor3F2Scene,
+        Corridor4F1Scene,
+        Corridor4F2Scene,
+        Corridor5F1Scene,
+        Corridor5F2Scene,
+        Corridor6F1Scene,
+        Corridor6F2Scene,
+        Corridor7F1Scene,
+        Corridor7F2Scene,
+        Corridor8F1Scene,
+        // ✅ 추가: 8f-2
+        Corridor8F2Scene
     ]
 };
 

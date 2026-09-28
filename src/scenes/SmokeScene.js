@@ -118,7 +118,7 @@ export default class SmokeScene extends Phaser.Scene {
             this.videoElement.remove();
             this.videoElement = null;
         }
-        this.scene.start("ExScene");
+        this.scene.start("MainHallScene", { floor: 2 });
     }
 
     getWalkFrames(direction) {
