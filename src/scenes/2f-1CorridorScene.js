@@ -1,4 +1,3 @@
-import Phaser from "phaser";
 
 export default class Corridor2F1Scene extends Phaser.Scene {
     constructor() { super("2f-1CorridorScene"); }
