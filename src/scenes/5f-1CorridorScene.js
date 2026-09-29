@@ -1,4 +1,4 @@
-import Phaser from "phaser";
+
 export default class Corridor5F1Scene extends Phaser.Scene {
     constructor() { super("5f-1CorridorScene"); }
     init(data) { this.floor=5; this.answerNumber="5104"; this.saveKey="5L"; this.collected=window.collectedNumbers[this.saveKey]||false; }
