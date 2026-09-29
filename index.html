@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <title>청운대학교</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>*{box-sizing:border-box;margin:0;padding:0}html,body{background:#000;width:100vw;height:100vh;overflow:hidden}#game{background:#000;width:100vw;height:100vh;display:block}canvas{object-fit:cover;display:block;width:100vw!important;height:100vh!important}</style>
-    
-    <!-- ✅ 정확한 버전: 3.88.2 -->
-    <script src="https://cdn.jsdelivr.net/npm/phaser@3.88.2/dist/phaser.min.js"></script>
-    
-    <script type="module" src="./src/main.js"></script>
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        html,body{background:#000;width:100vw;height:100vh;overflow:hidden}
+        #game{background:#000;width:100vw;height:100vh;display:block}
+        canvas{object-fit:cover;display:block;width:100vw!important;height:100vh!important}
+    </style>
+    <!-- CDN 삭제! Vite가 알아서 포함시킵니다 -->
 </head>
 <body>
     <div id="game"></div>
+    <script type="module" src="./src/main.js"></script>
 </body>
 </html>

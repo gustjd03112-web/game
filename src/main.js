@@ -1,3 +1,5 @@
+// ✅ 이 줄을 제일 첫 줄에 추가!
+import Phaser from "phaser";
 
 import SmokeScene from "./scenes/SmokeScene.js";
 import LobbyScene from "./scenes/LobbyScene.js";
@@ -159,4 +161,5 @@ const config = {
         Corridor8F1Scene, Corridor8F2Scene
     ]
 };
+
 new Phaser.Game(config);

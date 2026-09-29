@@ -1,9 +1,9 @@
 import { defineConfig } from 'vite';
 
-export default defineConfig(({ mode }) => ({
-  base: mode === 'production' ? '/game/' : '/',
+export default defineConfig({
+  base: '/game/',
   build: {
     outDir: 'dist',
     emptyOutDir: true
   }
-}));
+});
