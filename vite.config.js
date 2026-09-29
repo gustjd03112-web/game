@@ -1,13 +1,11 @@
 import { defineConfig } from 'vite'
 
-export default defineConfig({
-  // 개발할 때
-  //base: '/'
+export default defineConfig(({ mode }) => ({
+  // mode에 따라 자동으로 base 경로 변경
+  base: mode === 'production' ? '/game/' : '/',
   
-  // GitHub Pages에 올릴 때
-  base: '/game/',
   build: {
     outDir: 'dist',
     emptyOutDir: true
   }
-})
+}))
